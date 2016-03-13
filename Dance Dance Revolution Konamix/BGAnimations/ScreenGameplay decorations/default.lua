@@ -223,9 +223,6 @@ for pn in ivalues(PlayerNumber) do
 	};
 end;
 
-
-t[#t+1] = StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
 t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
-t[#t+1] = StandardDecorationFromFileOptional("SongTitle","SongTitle");
 
 return t

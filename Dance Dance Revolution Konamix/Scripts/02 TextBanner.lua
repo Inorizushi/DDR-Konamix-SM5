@@ -32,7 +32,7 @@ function TextBannerAfterSet(self,param)
 		Title:zoom(0.75)
 		
 		-- subtitle below title
-		Subtitle:visible(true)
+		Subtitle:visible(false)
 		Subtitle:zoom(0.6)
 		Subtitle:y(0)
 		Subtitle:maxwidth(subMaxWidth)

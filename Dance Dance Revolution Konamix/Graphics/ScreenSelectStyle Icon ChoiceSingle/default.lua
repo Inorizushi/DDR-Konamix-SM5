@@ -4,13 +4,13 @@ local unjoinedPlayer = GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and "P2" or
 
 local t = Def.ActorFrame{
 	LoadActor(THEME:GetPathG("_pad","single"))..{
-		OnCommand=cmd(x,SCREEN_LEFT-100;y,SCREEN_CENTER_Y+120;sleep,0.75;linear,0.25;x,SCREEN_CENTER_X-210);
+		OnCommand=cmd(x,SCREEN_LEFT-100;y,SCREEN_CENTER_Y+120;sleep,0.75;linear,0.1;x,SCREEN_CENTER_X-210);
 		GainFocusCommand=cmd(diffuse,color("1,1,1,1"));
 		LoseFocusCommand=cmd(diffuse,color("0.25,0.25,0.25,1"));
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..masterPlayer))..{
 		BeginCommand=cmd(playcommand,"CheckNumPlayers");
-		OnCommand=cmd(x,SCREEN_CENTER_X-210;y,SCREEN_TOP-100;sleep,1.5;linear,0.25;y,SCREEN_CENTER_Y+25);
+		OnCommand=cmd(x,SCREEN_CENTER_X-210;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y+25);
 		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
 		LoseFocusCommand=cmd(diffuse,color("0.55,0.55,0.55,1");pause);
 		PlayerJoinedMessageCommand=cmd(playcommand,"CheckNumPlayers");

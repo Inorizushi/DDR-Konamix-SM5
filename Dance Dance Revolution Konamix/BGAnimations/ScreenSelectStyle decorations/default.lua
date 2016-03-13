@@ -5,7 +5,7 @@ t[#t+1] = Def.ActorFrame {
 		StartTransitioningCommand=cmd(play);
 	};
 	LoadActor("Header.png") .. {
-		InitCommand=cmd(halign,1;x,SCREEN_RIGHT;y,SCREEN_TOP+28);
+		InitCommand=cmd(CenterX;y,SCREEN_TOP+28);
 		OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.5;addx,-SCREEN_WIDTH);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};

@@ -56,7 +56,7 @@ local Prefs =
 	},
 	ComboUnderField =
 	{
-		Default = true,
+		Default = false,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true }
 	},

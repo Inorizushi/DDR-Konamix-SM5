@@ -20,7 +20,6 @@ local function StepsDisplay(pn)
 
 	return t;
 end
-t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHelpDisplay");
 
 local function PercentScore(pn)
 	local t = LoadFont("MusicScroll Titles")..{

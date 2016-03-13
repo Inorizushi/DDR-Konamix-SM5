@@ -9,12 +9,12 @@ local t = Def.ActorFrame{
 		LoseFocusCommand=cmd(diffuse,color("0.25,0.25,0.25,1"));
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..masterPlayer))..{
-		OnCommand=cmd(x,SCREEN_CENTER_X-32;y,SCREEN_TOP-100;sleep,1.25;linear,0.25;y,SCREEN_CENTER_Y-12);
+		OnCommand=cmd(x,SCREEN_CENTER_X-32;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y-12);
 		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
 		LoseFocusCommand=cmd(diffuse,color("0.55,0.55,0.55,1");pause);
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..secondPlayer))..{
-		OnCommand=cmd(x,SCREEN_CENTER_X+72;y,SCREEN_TOP-100;sleep,1.25;linear,0.25;y,SCREEN_CENTER_Y-12);
+		OnCommand=cmd(x,SCREEN_CENTER_X+72;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y-12);
 		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
 		LoseFocusCommand=cmd(diffuse,color("0.5,0.5,0.5,1");pause);
 	};

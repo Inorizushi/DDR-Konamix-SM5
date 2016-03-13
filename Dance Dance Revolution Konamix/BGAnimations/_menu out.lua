@@ -1,8 +1,10 @@
 return Def.ActorFrame {
 		LoadActor(THEME:GetPathB("","_bg.png"))  .. {
-			OnCommand=cmd(x,SCREEN_CENTER_X-640;y,SCREEN_CENTER_Y;linear,0.2;x,SCREEN_CENTER_X);
+			InitCommand=cmd(Center;setsize,SCREEN_WIDTH,480);
+			OnCommand=cmd(addx,-SCREEN_WIDTH;linear,0.2;addx,SCREEN_WIDTH);
 		};
 		LoadActor(THEME:GetPathB("","_bg2.png")) .. {
-			OnCommand=cmd(x,SCREEN_CENTER_X+640;y,SCREEN_CENTER_Y;linear,0.2;x,SCREEN_CENTER_X);
+			InitCommand=cmd(Center;setsize,SCREEN_WIDTH,480);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.2;addx,-SCREEN_WIDTH);
 		};
 	};
