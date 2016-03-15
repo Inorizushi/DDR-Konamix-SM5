@@ -3,6 +3,11 @@ local t = Def.ActorFrame{
 	-- screen and tile properly. FUCKKKKKKKK
 
 	Def.ActorFrame{
+--Dim on intro
+		Def.Quad{
+			InitCommand=cmd(xy,SCREEN_LEFT,SCREEN_TOP;setsize,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,color("0,0,0,1");diffusealpha,0.7);
+			OnCommand=cmd(sleep,2.8;linear,0.5;diffusealpha,0);
+		};
 -- Middle Sprites		
 		LoadActor("_danger bg 4x2")..{
 		InitCommand=cmd(xy,SCREEN_LEFT,SCREEN_TOP;diffusealpha,0);

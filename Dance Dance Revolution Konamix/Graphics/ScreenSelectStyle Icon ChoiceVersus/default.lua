@@ -3,27 +3,33 @@ local masterPlayer = GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and "P1" or "
 local secondPlayer = GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and "P2" or "P1"
 
 local t = Def.ActorFrame{
-	LoadActor(THEME:GetPathG("_pad","versus"))..{
+	LoadActor(THEME:GetPathG("_pad","double"))..{
 		OnCommand=cmd(x,SCREEN_LEFT-140;y,SCREEN_CENTER_Y+80;sleep,0.5;linear,0.25;x,SCREEN_CENTER_X+20);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1"));
-		LoseFocusCommand=cmd(diffuse,color("0.25,0.25,0.25,1"));
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1"));
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("0.5,0.5,0.5,1"));
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..masterPlayer))..{
 		OnCommand=cmd(x,SCREEN_CENTER_X-32;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y-12);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
-		LoseFocusCommand=cmd(diffuse,color("0.55,0.55,0.55,1");pause);
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1");play);
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("#580830");pause);
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..secondPlayer))..{
 		OnCommand=cmd(x,SCREEN_CENTER_X+72;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y-12);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
-		LoseFocusCommand=cmd(diffuse,color("0.5,0.5,0.5,1");pause);
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1");play);
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("#580830");pause);
 	};
 	Def.ActorFrame{
-		Name="NumStages";
-		OnCommand=cmd(x,SCREEN_LEFT-140;y,SCREEN_CENTER_Y+110;sleep,0.5;linear,0.25;x,SCREEN_CENTER_X+70);
-		LoadActor(THEME:GetPathG("_numstage","3blue"))..{
-			GainFocusCommand=cmd(diffuse,color("1,1,1,1"););
-			LoseFocusCommand=cmd(diffuse,color("0.5,0.5,0.5,1"));
+		Name="StageBubbleFrame";
+		InitCommand=cmd(x,SCREEN_CENTER_X+66;y,SCREEN_CENTER_Y+108);
+		LoadActor(THEME:GetPathG("_stage bubble","left"))..{
+			InitCommand=cmd(cropbottom,1);
+			OnCommand=cmd(linear,0.5;cropbottom,0);
+			OffCommand=cmd(linear,0.5;cropbottom,1);
+		};
+		LoadFont("ScreenSelectStyleBlue NumStages")..{
+			Text=PREFSMAN:GetPreference("SongsPerPlay");
+			InitCommand=cmd(x,-58;y,-1;);
+			OffCommand=cmd(sleep,0.25;diffusealpha,0);
 		};
 	};
 	LoadActor("_label")..{

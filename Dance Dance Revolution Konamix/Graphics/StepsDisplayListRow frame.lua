@@ -31,9 +31,14 @@ local t = Def.ActorFrame{
 				local p1Diff = steps:GetDifficulty();
 				local matchState = DifficultyToState[p1Diff];
 			if	self:GetState() ~= matchState then
-				self:diffusealpha(0.5)
+				self:diffusealpha(0.5);
+				self:stopeffect()
 			else
-				self:diffusealpha(1)
+				self:diffusealpha(1);
+				self:glowshift();
+				self:effectcolor2(color("1,1,1,0.5"));
+				self:effectcolor1(color("1,1,1,0.2"));
+				self:effectperiod(0.5);
 				end
 			end;
 		end;
@@ -54,9 +59,14 @@ local t = Def.ActorFrame{
 				local p2Diff = steps:GetDifficulty();
 				local matchState = DifficultyToState[p2Diff];
 			if	self:GetState() ~= matchState then
-				self:diffusealpha(0.5)
+				self:diffusealpha(0.5);
+				self:stopeffect()
 			else
-				self:diffusealpha(1)
+				self:diffusealpha(1);
+				self:glowshift();
+				self:effectcolor2(color("1,1,1,0.5"));
+				self:effectcolor1(color("1,1,1,0.2"));
+				self:effectperiod(0.5);
 				end
 			end;
 		end;

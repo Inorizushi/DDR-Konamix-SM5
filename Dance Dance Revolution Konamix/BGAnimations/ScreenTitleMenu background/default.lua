@@ -1,7 +1,8 @@
 
 local t = Def.ActorFrame {
 	LoadActor("KonamixBG.png") .. {
-		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;linear,0.25;diffuse,color("0.5,0.5,0.5,1"));
+		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,color("0.25,0.25,0.25,1"));
+		OnCommand=cmd(diffusealpha,0;linear,0.2;diffusealpha,1);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
 		LoadActor("warning.png") .. {

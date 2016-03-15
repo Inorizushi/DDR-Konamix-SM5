@@ -2,7 +2,7 @@ local t = Def.ActorFrame{};
 
 
 t[#t+1] = Def.ActorFrame{
-	Def.Sprite{
+--[[	Def.Sprite{
 		Name="BackgroundWheel";
 		InitCommand=cmd(draworder,0;cropto,345.3,108;y,-188);
 		SetMessageCommand=function(self,params)
@@ -16,32 +16,32 @@ t[#t+1] = Def.ActorFrame{
 			end;
 		end;
 	};
-	Def.Banner{
+--]]	Def.Banner{
 		Name="BannerWheel";
-		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45);
+		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;addy,-2);
 		SetMessageCommand=function(self,params)
 			local course = params.Course;
 			local song = params.Song;
 			if song and not course then
 				-- this is where we do all song-specific stuff
 				self:LoadFromSong(song);
-				self:zoom(0.8);
+				self:zoom(0.7);
 			elseif course and not song then
 				-- this is where we do all course-specific stuff
 				self:LoadFromCourse(course);
-				self:zoom(0.8);
+				self:zoom(0.7);
 			else
 				self:Load( THEME:GetPathG("Common fallback","banner"));
-				self:zoom(0.8);
+				self:zoom(0.7);
 			end;
 		end;
 	};
 };
 
-t[#t+1] = Def.ActorFrame{
+--[[t[#t+1] = Def.ActorFrame{
 	LoadActor("diff frame")..{
 		InitCommand=cmd(draworder,99;y,-129);
 	};
 };
-
+--]]
 return t;

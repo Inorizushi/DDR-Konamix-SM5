@@ -3,22 +3,27 @@ local masterPlayer = GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and "P1" or "
 local unjoinedPlayer = GAMESTATE:GetMasterPlayerNumber() == PLAYER_1 and "P2" or "P1"
 
 local t = Def.ActorFrame{
-	LoadActor(THEME:GetPathG("_pad","versus"))..{
+	LoadActor(THEME:GetPathG("_pad","double"))..{
 		OnCommand=cmd(x,SCREEN_LEFT-150;y,SCREEN_CENTER_Y-10;sleep,0.25;linear,0.25;x,SCREEN_CENTER_X+160;);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1"));
-		LoseFocusCommand=cmd(diffuse,color("0.25,0.25,0.25,1"));
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1"));
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("0.5,0.5,0.5,1"));
 	};
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..masterPlayer))..{
 		OnCommand=cmd(x,SCREEN_CENTER_X+157;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y-100);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
-		LoseFocusCommand=cmd(diffuse,color("0.55,0.55,0.55,1");pause);
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1");play);
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("#580830");pause);
 	};
 	Def.ActorFrame{
-		Name="NumStages";
-		OnCommand=cmd(x,SCREEN_LEFT-150;y,SCREEN_CENTER_Y+20;sleep,0.25;linear,0.25;x,SCREEN_CENTER_X+200);
-		LoadActor(THEME:GetPathG("_numstage","3blue"))..{
-			GainFocusCommand=cmd(diffuse,color("1,1,1,1"););
-			LoseFocusCommand=cmd(diffuse,color("0.5,0.5,0.5,1"));
+		Name="StageBubbleFrame";
+		InitCommand=cmd(x,SCREEN_CENTER_X+225;y,SCREEN_CENTER_Y+13);
+
+		LoadActor(THEME:GetPathG("_stage bubble","left"))..{
+
+		};
+		LoadFont("ScreenSelectStyleBlue NumStages")..{
+			Text=PREFSMAN:GetPreference("SongsPerPlay");
+			InitCommand=cmd(x,-57;y,-1;);
+			
 		};
 	};
 	LoadActor("_label")..{

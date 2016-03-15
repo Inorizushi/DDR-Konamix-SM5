@@ -1,17 +1,16 @@
 local t = Def.ActorFrame {};
-
 t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(Center);
 	Def.ActorFrame {
+	InitCommand=cmd(Center;);
 		Def.Quad {
-			InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT);
+			InitCommand=cmd(setsize,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,color("#000000"));
 			OnCommand=cmd();
 		};
 		LoadActor("1") .. {
-			OnCommand=cmd(zoomx,1.1;diffuse,0,0,0,1;linear,0.5;diffuse,1,1,1,1;sleep,4;linear,0.5;diffusealpha,0);
+			OnCommand=cmd(diffuse,0,0,0,1;linear,0.5;diffuse,1,1,1,1;sleep,4;linear,0;diffusealpha,0);
 		};
-        	LoadActor("2") .. {
-			OnCommand=cmd(zoomx,1.1;diffusealpha,0;sleep,6;linear,0.5;diffusealpha,1);
+        LoadActor("2") .. {
+			OnCommand=cmd(diffusealpha,0;sleep,4.5;linear,0.5;diffusealpha,1);
 		};
 	};
 };

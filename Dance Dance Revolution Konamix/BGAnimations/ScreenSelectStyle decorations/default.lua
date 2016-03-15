@@ -5,8 +5,8 @@ t[#t+1] = Def.ActorFrame {
 		StartTransitioningCommand=cmd(play);
 	};
 	LoadActor("Header.png") .. {
-		InitCommand=cmd(CenterX;y,SCREEN_TOP+28);
-		OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.5;addx,-SCREEN_WIDTH);
+		InitCommand=cmd(CenterX;valign,0;y,SCREEN_TOP);
+		OnCommand=cmd(addx,-SCREEN_WIDTH;linear,0.5;addx,SCREEN_WIDTH);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
 	LoadActor("Footer.png") .. {
@@ -14,7 +14,8 @@ t[#t+1] = Def.ActorFrame {
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
 		LoadActor("select_style.png") .. {
-		OnCommand=cmd(x,SCREEN_LEFT-100;y,30;sleep,1;linear,0.5;x,SCREEN_CENTER_X+40);
+		InitCommand=cmd(y,SCREEN_TOP+35;x,SCREEN_CENTER_X+40);
+		OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.8;addx,-SCREEN_WIDTH);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
 };

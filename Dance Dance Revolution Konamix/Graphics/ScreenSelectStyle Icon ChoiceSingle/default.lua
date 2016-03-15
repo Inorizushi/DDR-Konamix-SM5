@@ -11,8 +11,8 @@ local t = Def.ActorFrame{
 	LoadActor(THEME:GetPathG("","_dancers/dancer"..masterPlayer))..{
 		BeginCommand=cmd(playcommand,"CheckNumPlayers");
 		OnCommand=cmd(x,SCREEN_CENTER_X-210;y,SCREEN_TOP-100;sleep,0.8;linear,0.1;y,SCREEN_CENTER_Y+25);
-		GainFocusCommand=cmd(diffuse,color("1,1,1,1");play);
-		LoseFocusCommand=cmd(diffuse,color("0.55,0.55,0.55,1");pause);
+		GainFocusCommand=cmd(linear,0.2;diffuse,color("1,1,1,1");play);
+		LoseFocusCommand=cmd(linear,0.2;diffuse,color("#580830");pause);
 		PlayerJoinedMessageCommand=cmd(playcommand,"CheckNumPlayers");
 		CheckNumPlayersCommand=function(self,param)
 			if GAMESTATE:GetNumPlayersEnabled() > 1 then
@@ -22,30 +22,32 @@ local t = Def.ActorFrame{
 			end
 		end;
 	};
-		Def.ActorFrame{
-		Name="NumStages";
-		OnCommand=cmd(x,SCREEN_LEFT-100;y,SCREEN_CENTER_Y+150;sleep,0.75;linear,0.25;x,SCREEN_CENTER_X-190);
-		LoadActor(THEME:GetPathG("_numstage","normal"))..{
-			GainFocusCommand=cmd(diffuse,color("1,1,1,1"););
-			LoseFocusCommand=cmd(diffuse,color("0.5,0.5,0.5,1"));
+	Def.ActorFrame{
+		Name="StageBubbleFrame";
+		InitCommand=cmd(x,SCREEN_CENTER_X-187;y,SCREEN_CENTER_Y+158);
+		LoadActor(THEME:GetPathG("_stage bubble","right"))..{
+		};
+		LoadFont("ScreenSelectStyle NumStages")..{
+			Text=PREFSMAN:GetPreference("SongsPerPlay");
+			InitCommand=cmd(x,-59;y,-1;);
 		};
 	};
-		LoadActor("_label")..{
-		InitCommand=cmd(y,SCREEN_CENTER_Y-148);
+	
+	LoadActor("_label")..{
+		InitCommand=cmd(x,SCREEN_CENTER_X-130;y,SCREEN_CENTER_Y-148);
 		OnCommand=function(self)
 			if GAMESTATE:GetNumPlayersEnabled() == 1 then
-				self:diffusealpha(0):sleep(1.25):diffusealpha(1);
-				self:x(SCREEN_CENTER_X-320);
+				self:diffusealpha(0):sleep(0.5):diffusealpha(1);
+				self:addx(-190);
 				self:linear(0.2);
-				self:x(SCREEN_CENTER_X-130);
+				self:addx(190);
 			end
 		end;
-		OffCommand=cmd(linear,0.5;faderight,10);
 		GainFocusCommand=function(self)
 				self:visible(true)
-				self:x(SCREEN_CENTER_X-320);
+				self:addx(-190);
 				self:linear(0.2);
-				self:x(SCREEN_CENTER_X-130);
+				self:addx(190);
 		end;
 		LoseFocusCommand=cmd(visible,false);
 	};
