@@ -14,10 +14,10 @@ t[#t+1] = Def.ActorFrame {
 	};
 
 	-- todo: generate a better font for these.
-	LoadFont("_shared1")..{
+	LoadFont("ScreenSystemLayer credits normal")..{
 		Text=string.upper(string_name);
-		InitCommand=cmd(y,-12;maxwidth,232);
-		OnCommand=cmd(zoom,2;diffuse,Color.Yellow;skewx,-0.125);
+		InitCommand=cmd(maxwidth,232);
+		OnCommand=cmd(zoom,2;diffuse,Color.Yellow;skewx,-0.5);
 	};
 	LoadActor("_background base")..{
 		GainFocusCommand=cmd(visible,true;diffusealpha,0.5;glowshift;blend,Blend.Add;;effectcolor1,color("1,1,1,0");effectcolor2,color("1,1,1,0.5");effectperiod,0.5);

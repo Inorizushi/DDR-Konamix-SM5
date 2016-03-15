@@ -12,7 +12,36 @@ local t = Def.ActorFrame{
 		InitCommand=cmd(CenterX;y,SCREEN_CENTER_Y-44;addx,-SCREEN_WIDTH;zoomx,0.5;);
 		OnCommand=cmd(sleep,3.417;linear,0.3;addx,SCREEN_WIDTH;zoomx,1;sleep,2.333;linear,0.267;zoomy,0);
 	};
+	Def.ActorFrame{
+		Name="Message1";
+		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
 
+		Def.Quad{
+			InitCommand=cmd(zoomto,320,144);
+			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,10;linear,0.3;diffuse,color("0,0,0,0.5");sleep,3;linear,0.3;diffusealpha,0);
+		};
+	};
+
+	Def.ActorFrame{
+		Name="Message2";
+		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
+
+		Def.Quad{
+			InitCommand=cmd(zoomto,320,144);
+			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,18;linear,0.3;diffuse,color("0,0,0,0.5");sleep,3;linear,0.3;diffusealpha,0);
+		};
+	};
+
+	Def.ActorFrame{
+		Name="Message3";
+		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
+
+		Def.Quad{
+			InitCommand=cmd(zoomto,320,144);
+			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,21;linear,0.3;diffuse,color("0,0,0,0.5");sleep,2.5;linear,0.3;diffusealpha,0);
+		};
+	};
+	
 	LoadActor("warning1.png")..{
 		Name="Message1";
 		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
@@ -56,35 +85,6 @@ local t = Def.ActorFrame{
 	};
 
 	-- let the messages begin
-	Def.ActorFrame{
-		Name="Message1";
-		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
-
-		Def.Quad{
-			InitCommand=cmd(zoomto,320,144);
-			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,10;linear,0.3;diffuse,color("0,0,0,0.5");sleep,3;linear,0.3;diffusealpha,0);
-		};
-	};
-
-	Def.ActorFrame{
-		Name="Message2";
-		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
-
-		Def.Quad{
-			InitCommand=cmd(zoomto,320,144);
-			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,18;linear,0.3;diffuse,color("0,0,0,0.5");sleep,3;linear,0.3;diffusealpha,0);
-		};
-	};
-
-	Def.ActorFrame{
-		Name="Message3";
-		InitCommand=cmd(x,SCREEN_CENTER_X+148;y,SCREEN_CENTER_Y+74;);
-
-		Def.Quad{
-			InitCommand=cmd(zoomto,320,144);
-			OnCommand=cmd(diffuse,color("0,0,0,0");hibernate,21;linear,0.3;diffuse,color("0,0,0,0.5");sleep,2.5;linear,0.3;diffusealpha,0);
-		};
-	};
 
 };
 

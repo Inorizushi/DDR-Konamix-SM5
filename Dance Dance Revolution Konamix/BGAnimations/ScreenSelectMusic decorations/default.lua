@@ -36,6 +36,10 @@ if not GAMESTATE:IsCourseMode() then
 			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+54);
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
+		LoadActor("music") .. {
+			InitCommand=cmd(x,SCREEN_CENTER_X-2;y,SCREEN_TOP+35);
+			OnCommand=cmd(addx,-SCREEN_WIDTH;smooth,0.5;addx,SCREEN_WIDTH);
+		};
 		LoadActor("bar")..{
 			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-15);
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
@@ -155,7 +159,6 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 	CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
 	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
 	ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-	OffCommand=cmd(accelerate,0.2;diffusealpha,0;);
 	SetCommand=function(self) 
 		local song = GAMESTATE:GetCurrentSong()
 		local course = GAMESTATE:GetCurrentCourse()
@@ -177,7 +180,6 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 	CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
 	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
 	ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-	OffCommand=cmd(accelerate,0.2;diffusealpha,0;);
 	SetCommand=function(self) 
 		local song = GAMESTATE:GetCurrentSong()
 		if song then 
@@ -192,36 +194,36 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 
 --Left Arrows
 t[#t+1] = Def.ActorFrame{
-	InitCommand=cmd(y,SCREEN_CENTER_Y-75);
+	InitCommand=cmd(y,SCREEN_CENTER_Y-75;zoom,1);
 	OnCommand=cmd(addx,SCREEN_WIDTH;decelerate,0.5;addx,-SCREEN_WIDTH);
 	LoadActor(THEME:GetPathG("EditMenu","Left 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X-280;);
+		InitCommand=cmd(x,SCREEN_CENTER_X-280;);
 		OnCommand=cmd(animate,true;effectoffset,0.3);
 	};
 	LoadActor(THEME:GetPathG("EditMenu","Left 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X-250;);
-		OnCommand=cmd(animate,true;effectoffset,0.6);
+		InitCommand=cmd(x,SCREEN_CENTER_X-260;);
+		OnCommand=cmd(animate,true;effectoffset,0.8);
 	};
 	LoadActor(THEME:GetPathG("EditMenu","Left 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X-220;);
-		OnCommand=cmd(animate,true;effectoffset,0.9;);
+		InitCommand=cmd(x,SCREEN_CENTER_X-240;);
+		OnCommand=cmd(animate,true;effectoffset,1.3;);
 	};
 };
 
 --Right Arrows
 t[#t+1] = Def.ActorFrame{
-	InitCommand=cmd(y,SCREEN_CENTER_Y-75);
+	InitCommand=cmd(zoom,1;y,SCREEN_CENTER_Y-75);
 	OnCommand=cmd(addx,SCREEN_WIDTH;decelerate,0.5;addx,-SCREEN_WIDTH);
 	LoadActor(THEME:GetPathG("EditMenu","Right 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X+280;);
+		InitCommand=cmd(x,SCREEN_CENTER_X+280;);
 		OnCommand=cmd(animate,true;effectoffset,0.3);
 	};
 	LoadActor(THEME:GetPathG("EditMenu","Right 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X+250;);
+		InitCommand=cmd(x,SCREEN_CENTER_X+260;);
 		OnCommand=cmd(animate,true;effectoffset,0.6);
 	};
 	LoadActor(THEME:GetPathG("EditMenu","Right 1x2")) .. {
-		InitCommand=cmd(zoom,2;x,SCREEN_CENTER_X+220;);
+		InitCommand=cmd(x,SCREEN_CENTER_X+240;);
 		OnCommand=cmd(animate,true;effectoffset,0.9;);
 	};
 };

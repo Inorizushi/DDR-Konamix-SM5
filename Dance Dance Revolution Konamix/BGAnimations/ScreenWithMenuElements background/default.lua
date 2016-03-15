@@ -2,6 +2,6 @@
 -- I prefer to keep these optional, incase another screen wants to hide 
 -- these elements.
 local t = Def.ActorFrame {
-	LoadActor("starsbg")..{ InitCommand=cmd(Center) },
+	LoadActor("bg")..{ InitCommand=cmd(Center) },
 };
 return t

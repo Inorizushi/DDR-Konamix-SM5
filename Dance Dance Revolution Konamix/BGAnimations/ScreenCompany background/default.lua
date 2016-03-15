@@ -7,10 +7,10 @@ t[#t+1] = Def.ActorFrame {
 			OnCommand=cmd();
 		};
 		LoadActor("1") .. {
-			OnCommand=cmd(diffuse,0,0,0,1;linear,0.5;diffuse,1,1,1,1;sleep,4;linear,0;diffusealpha,0);
+			OnCommand=cmd(diffuse,0,0,0,1;linear,0.3;diffuse,1,1,1,1;sleep,2.5;linear,0;diffusealpha,0);
 		};
         LoadActor("2") .. {
-			OnCommand=cmd(diffusealpha,0;sleep,4.5;linear,0.5;diffusealpha,1);
+			OnCommand=cmd(diffusealpha,0;sleep,3;linear,0.3;diffusealpha,1);
 		};
 	};
 };
