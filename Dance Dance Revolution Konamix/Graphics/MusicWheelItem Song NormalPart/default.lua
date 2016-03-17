@@ -16,7 +16,8 @@ t[#t+1] = Def.ActorFrame{
 			end;
 		end;
 	};
---]]	Def.Banner{
+--]]	
+	Def.Banner{
 		Name="BannerWheel";
 		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;addy,-2);
 		SetMessageCommand=function(self,params)
@@ -37,11 +38,21 @@ t[#t+1] = Def.ActorFrame{
 		end;
 	};
 };
-
---[[t[#t+1] = Def.ActorFrame{
-	LoadActor("diff frame")..{
-		InitCommand=cmd(draworder,99;y,-129);
+t[#t+1] = Def.ActorFrame{
+LoadActor("blue hl")..{
+			InitCommand=cmd(rotationz,-45;addy,-2;zoom,0.7);
+			SetCommand=function(self,param)
+		if param.Song then
+			if PROFILEMAN:IsSongNew(param.Song) then
+				self:visible(true);
+			else
+				self:visible(false);
+			end
+		else
+			self:visible(false);
+		end
+	end;
 	};
 };
---]]
+
 return t;

@@ -4,47 +4,30 @@ t[#t+1] = Def.ActorFrame{
 		LoadActor(THEME:GetPathS("","TransitionSound"))..{
 			StartTransitioningCommand=cmd(play);
 		};
-		--Normal Ratio
 		LoadActor("Bg")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,SCREEN_CENTER_Y;linear,0.75;xy,SCREEN_CENTER_X,SCREEN_CENTER_Y)
+			InitCommand=cmd(Center;setsize,SCREEN_WIDTH,480);
+			OnCommand=cmd(addx,-SCREEN_WIDTH;linear,0.75;addx,SCREEN_WIDTH);
 		};
-		--16:9
-		LoadActor("Bg")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,SCREEN_CENTER_Y)
-		};
-				LoadActor("Bg")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,SCREEN_CENTER_Y)
-		};
-		--16:9
-				LoadActor("HFalse")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,27)
-		};
-				LoadActor("HFalse")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,27)
-		};	
-		--Normal Ratio
 		LoadActor("HFalse")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,27;linear,0.75;xy,SCREEN_CENTER_X,27)
+			InitCommand=cmd(halign,0;x,SCREEN_LEFT;y,SCREEN_TOP+27);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.75;addx,-SCREEN_WIDTH);
 		};
-				LoadActor("Letters")..{
-				OnCommand=cmd(xy,SCREEN_CENTER_X-640,27;sleep,0.75;linear,0.75;xy,SCREEN_CENTER_X,27)
+		LoadActor("Letters")..{
+			InitCommand=cmd(CenterX;y,SCREEN_TOP+27);
+			OnCommand=cmd(addx,-SCREEN_WIDTH;sleep,0.75;linear,0.75;addx,SCREEN_WIDTH);
 		};
 		LoadActor("Footer")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,464;linear,0.75;xy,SCREEN_CENTER_X,464)
-		};
-			--16:9
-				LoadActor("Footer")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,464)
-		};
-				LoadActor("Footer")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,464)
+			InitCommand=cmd(halign,0;x,SCREEN_LEFT;y,SCREEN_BOTTOM-16);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.75;addx,-SCREEN_WIDTH);
 		};
 		--PlayerTitles
-				LoadActor("TitlesP1")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-240,SCREEN_CENTER_Y-42.5;diffusealpha,0;player,PLAYER_1;linear,0.75;diffusealpha,1)
+		LoadActor("TitlesP1")..{
+			InitCommand=cmd(x,SCREEN_CENTER_X-240;y,SCREEN_CENTER_Y-42.5);
+			OnCommand=cmd(diffusealpha,0;player,PLAYER_1;linear,0.75;diffusealpha,1);
 		};
-				LoadActor("TitlesP2")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+65,SCREEN_CENTER_Y-42.5;diffusealpha,0;player,PLAYER_2;linear,0.75;diffusealpha,1)
+		LoadActor("TitlesP2")..{
+			InitCommand=cmd(x,SCREEN_CENTER_X+65;y,SCREEN_CENTER_Y-42.5);
+			OnCommand=cmd(diffusealpha,0;player,PLAYER_2;linear,0.75;diffusealpha,1);
 		};
 	};
 

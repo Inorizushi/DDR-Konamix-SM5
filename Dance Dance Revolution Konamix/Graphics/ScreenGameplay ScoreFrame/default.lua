@@ -12,7 +12,7 @@ if GAMESTATE:IsExtraStage() or GAMESTATE:IsExtraStage2() then scoreFrame = "norm
 
 return Def.ActorFrame{
 	LoadActor(scoreFrame).. {
-		InitCommand=cmd(addx,-159;player,PLAYER_1);
+		InitCommand=cmd(addx,-176;player,PLAYER_1);
 	};
 	LoadActor(scoreFrame).. {
 		InitCommand=cmd(addx,196;player,PLAYER_2);

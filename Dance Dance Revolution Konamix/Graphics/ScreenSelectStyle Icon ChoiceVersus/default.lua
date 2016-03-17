@@ -24,12 +24,10 @@ local t = Def.ActorFrame{
 		LoadActor(THEME:GetPathG("_stage bubble","left"))..{
 			InitCommand=cmd(cropbottom,1);
 			OnCommand=cmd(linear,0.5;cropbottom,0);
-			OffCommand=cmd(linear,0.5;cropbottom,1);
 		};
 		LoadFont("ScreenSelectStyleBlue NumStages")..{
 			Text=PREFSMAN:GetPreference("SongsPerPlay");
 			InitCommand=cmd(x,-58;y,-1;);
-			OffCommand=cmd(sleep,0.25;diffusealpha,0);
 		};
 	};
 	LoadActor("_label")..{

@@ -267,3 +267,8 @@ function Actor:scale_or_crop_background()
 		self:zoomto(SCREEN_HEIGHT*graphicAspect,SCREEN_HEIGHT)
 	end
 end
+
+--TRANSLIT BECAUSE FUCK NATIVE LANGUAGE USERS.
+if Title:GetText() == "祭 JAPAN" then
+	Title:settext("Matsuri JAPAN")
+end
