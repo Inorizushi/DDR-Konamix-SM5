@@ -2,70 +2,11 @@ local t = LoadFallbackB();
 
 t[#t+1] = Def.ActorFrame{
 	Def.Quad{
-		InitCommand=cmd(Center;setsize,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,color("#000000");diffusealpha,0;draworder,1);
+		InitCommand=cmd(CenterX;y,SCREEN_CENTER_Y+120;setsize,SCREEN_WIDTH,200;diffuse,color("#000000");diffusealpha,0;draworder,1);
 		StartSelectingStepsMessageCommand=cmd(sleep,0.25;linear,0.5;diffusealpha,1);
 		SongUnchosenMessageCommand=cmd(stoptweening;decelerate,0.2;diffusealpha,0;);
 	};
 };
-
---Banners
-t[#t+1] = Def.ActorFrame{
---Left
-	Def.Sprite{
-		InitCommand=cmd(cropto,320,320;y,SCREEN_CENTER_Y-60;cropbottom,0.35;croptop,0.25);
-		OnCommand=cmd(addx,SCREEN_WIDTH;decelerate,0.5;addx,-SCREEN_WIDTH);
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
-		ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-		SetCommand=function(self,params)
-		local song = GAMESTATE:GetCurrentSong();
-		local course = GAMESTATE:GetCurrentCourse();
-			if song and not course then
-				self:LoadFromSongBackground(song);
-			elseif course and not song then
-				-- call fallback
-				self:Load( THEME:GetPathG("Common fallback","background") );
-			end;
-		end;
-	};
---Mid
-	Def.Sprite{
-		InitCommand=cmd(cropto,320,320;y,SCREEN_CENTER_Y-60;CenterX;cropbottom,0.35);
-		OnCommand=cmd(addx,SCREEN_WIDTH;decelerate,0.5;addx,-SCREEN_WIDTH);
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
-		ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-		SetCommand=function(self,params)
-		local song = GAMESTATE:GetCurrentSong();
-		local course = GAMESTATE:GetCurrentCourse();
-			if song and not course then
-				self:LoadFromSongBackground(song);
-			elseif course and not song then
-				-- call fallback
-				self:Load( THEME:GetPathG("Common fallback","background") );
-			end;
-		end;
-	};
---Right
-	Def.Sprite{
-		InitCommand=cmd(cropto,320,320;y,SCREEN_CENTER_Y-60;x,SCREEN_RIGHT;cropbottom,0.35;croptop,0.25);
-		OnCommand=cmd(addx,SCREEN_WIDTH;decelerate,0.5;addx,-SCREEN_WIDTH);
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
-		ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-		SetCommand=function(self,params)
-		local song = GAMESTATE:GetCurrentSong();
-		local course = GAMESTATE:GetCurrentCourse();
-			if song and not course then
-				self:LoadFromSongBackground(song);
-			elseif course and not song then
-				-- call fallback
-				self:Load( THEME:GetPathG("Common fallback","background") );
-			end;
-		end;
-	};
-};
-
 
 if not GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame{
@@ -74,11 +15,18 @@ if not GAMESTATE:IsCourseMode() then
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
 		LoadActor("music") .. {
-			InitCommand=cmd(x,SCREEN_CENTER_X-2;y,SCREEN_TOP+35);
+			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+35);
 			OnCommand=cmd(addx,-SCREEN_WIDTH;smooth,0.5;addx,SCREEN_WIDTH);
+			StartSelectingStepsMessageCommand=cmd(sleep,0.5;diffusealpha,0);
+			SongUnchosenMessageCommand=cmd(stoptweening;diffusealpha,1);
+		};
+		LoadActor("selstep") .. {
+			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+35;diffusealpha,0);
+			StartSelectingStepsMessageCommand=cmd(addx,-SCREEN_WIDTH;diffusealpha,1;smooth,0.5;addx,SCREEN_WIDTH);
+			SongUnchosenMessageCommand=cmd(stoptweening;diffusealpha,0);
 		};
 		LoadActor("bar")..{
-			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-15);
+			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-15;setsize,SCREEN_WIDTH,16);
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
 		LoadActor("diff frame")..{
@@ -86,11 +34,11 @@ if not GAMESTATE:IsCourseMode() then
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
 		LoadActor("diff frame")..{
-			InitCommand=cmd(x,SCREEN_LEFT;y,SCREEN_CENTER_Y-19);
+			InitCommand=cmd(x,SCREEN_CENTER_X-320;y,SCREEN_CENTER_Y-19);
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
 		LoadActor("diff frame")..{
-			InitCommand=cmd(x,SCREEN_RIGHT;y,SCREEN_CENTER_Y-19);
+			InitCommand=cmd(x,SCREEN_CENTER_X+320;y,SCREEN_CENTER_Y-19);
 			OnCommand=cmd(addx,SCREEN_WIDTH;smooth,0.5;addx,-SCREEN_WIDTH);
 		};
 		LoadActor("Footer")..{

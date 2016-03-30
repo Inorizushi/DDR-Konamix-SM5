@@ -2,7 +2,7 @@ local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame{
 	LoadActor("../ScreenSelectPlayMode background/background")..{
-		InitCommand=cmd(Center);
+		InitCommand=cmd(Center;setsize,SCREEN_WIDTH,SCREEN_HEIGHT);
 	};
 };
 

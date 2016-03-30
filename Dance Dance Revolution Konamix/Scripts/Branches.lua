@@ -9,18 +9,19 @@ Branch.StartGame = function()
 	return PREFSMAN:GetPreference("ShowCaution") and "ScreenCaution" or "ScreenSelectStyle"
 end
 
--- normal instructions
-Branch.InstructionsNormal = function()
-	return PREFSMAN:GetPreference("ShowInstructions") and "ScreenInstructions" or "ScreenSelectMusic"
-end
+hasChars = function()
+	return CHARMAN:GetAllCharacters() ~= nil
+end;
 
--- nonstop and oni instructions
-Branch.InstructionsCourse = function()
-	return PREFSMAN:GetPreference("ShowInstructions") and "ScreenInstructions" or "ScreenSelectCourse"
-end
+Branch.AfterProfileLoad = function()
+	-- if online, ignore character check and move straight to online
+	if IsNetConnected() then ReportStyle() end;
+	if IsNetSMOnline() or IsNetConnected() then
+		GAMESTATE:ApplyGameCommand("playmode,regular");
+		return ScreenNetSelectPlayMode()
+	end
 
-Branch.AfterInstructions = function()
-	return GAMESTATE:IsCourseMode() and "ScreenSelectCourse" or "ScreenSelectMusic"
+	return hasChars and "ScreenSelectCharacter" or "ScreenSelectPlayMode"
 end
 
 -- gameplay branch that takes extra stage into account

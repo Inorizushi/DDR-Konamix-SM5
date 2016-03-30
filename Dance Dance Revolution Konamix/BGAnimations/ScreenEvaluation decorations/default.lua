@@ -22,7 +22,7 @@ t[#t+1] = Def.ActorFrame{
 		};
 		--PlayerTitles
 		LoadActor("TitlesP1")..{
-			InitCommand=cmd(x,SCREEN_CENTER_X-240;y,SCREEN_CENTER_Y-42.5);
+			InitCommand=cmd(x,SCREEN_LEFT+80;y,SCREEN_CENTER_Y-42.5);
 			OnCommand=cmd(diffusealpha,0;player,PLAYER_1;linear,0.75;diffusealpha,1);
 		};
 		LoadActor("TitlesP2")..{
@@ -31,6 +31,50 @@ t[#t+1] = Def.ActorFrame{
 		};
 	};
 
+-- Song Title/Artist Info
+t[#t+1] = LoadFont("MusicScroll titles") .. { 
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+65;zoomx,0.75;horizalign,center;horizalign,center;playcommand,"Set"); 
+	SetCommand=function(self) 
+		local song = GAMESTATE:GetCurrentSong()
+		local course = GAMESTATE:GetCurrentCourse()
+		if song then 
+			if PROFILEMAN:IsSongNew(song) then
+					self:diffuse(color("#52f029"));
+				else
+					self:diffuse(color("#1cfff6"));
+				end;
+			self:settext(song:GetDisplayMainTitle()); 
+			self:playcommand("Refresh");
+		elseif course then
+			self:settext(course:GetDisplayFullTitle());
+			self:playcommand("Refresh");
+		else
+			self:settext("");
+			self:playcommand("Refresh");
+		end 
+	end;
+};
+--Subtitle
+t[#t+1] = LoadFont("MusicScroll titles") .. { 
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+72;zoomx,0.75;horizalign,center;playcommand,"Set"); 
+	SetCommand=function(self) 
+		local song = GAMESTATE:GetCurrentSong()
+		if song then
+			if PROFILEMAN:IsSongNew(song) then
+					self:diffuse(color("#52f029"));
+				else
+					self:diffuse(color("#1cfff6"));
+				end;
+			self:settext(song:GetDisplaySubTitle()); 
+			self:playcommand("Refresh");
+		else
+			self:settext("");
+			self:playcommand("Refresh");
+		end 
+	end;
+};
+
+	
 if ShowStandardDecoration("StepsDisplay") then
 	for pn in ivalues(GAMESTATE:GetHumanPlayers()) do
 		local t2 = Def.StepsDisplay {

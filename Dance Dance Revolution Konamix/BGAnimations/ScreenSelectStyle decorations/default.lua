@@ -12,7 +12,7 @@ t[#t+1] = Def.ActorFrame {
 		OnCommand=cmd(x,SCREEN_RIGHT+640;y,SCREEN_BOTTOM-17;linear,0.5;x,SCREEN_CENTER_X);
 	};
 		LoadActor("select_style.png") .. {
-		InitCommand=cmd(y,SCREEN_TOP+35;x,SCREEN_CENTER_X+40);
+		InitCommand=cmd(y,SCREEN_TOP+35;x,SCREEN_CENTER_X);
 		OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.8;addx,-SCREEN_WIDTH);
 	};
 };
