@@ -56,7 +56,7 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 };
 --Subtitle
 t[#t+1] = LoadFont("MusicScroll titles") .. { 
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+72;zoomx,0.75;horizalign,center;playcommand,"Set"); 
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_TOP+80;zoomx,0.75;horizalign,center;playcommand,"Set"); 
 	SetCommand=function(self) 
 		local song = GAMESTATE:GetCurrentSong()
 		if song then

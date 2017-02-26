@@ -6,8 +6,9 @@ local icon_color = ModeIconColors[gc:GetName()];
 
 local t = Def.ActorFrame {};
 t[#t+1] = Def.ActorFrame {
+	OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 	GainFocusCommand=cmd(addx,20;linear,0.1;addx,-40;linear,0.1;addx,20);
-	LoseFocusCommand=cmd(finishtweening;stopeffect;decelerate,0.1);
+	LoseFocusCommand=cmd(stoptweening;stopeffect;decelerate,0.1);
 
 	LoadActor("_background base")..{
 		InitCommand=cmd();

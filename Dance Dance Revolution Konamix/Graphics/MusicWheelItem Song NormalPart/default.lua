@@ -1,6 +1,6 @@
 local t = Def.ActorFrame{};
 
-
+if not GAMESTATE:IsCourseMode() then 
 t[#t+1] = Def.ActorFrame{
 --[[Def.Sprite{
 		Name="BackgroundWheel";
@@ -16,7 +16,21 @@ t[#t+1] = Def.ActorFrame{
 			end;
 		end;
 	};
---]]	
+--]]
+	Def.Quad{
+		InitCommand=cmd(rotationz,-45;addy,-2;zoom,0.7;scaletoclipped,182,58);
+		SetCommand=function(self,param)
+			if param.Song then
+				if PROFILEMAN:IsSongNew(param.Song) then
+					self:visible(true):diffuse(color("#0000ff"));
+				else
+					self:visible(true):diffuse(color("#808080"));
+				end
+			else
+				self:visible(false);
+			end
+		end;
+};
 	Def.Banner{
 		Name="BannerWheel";
 		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;addy,-2);
@@ -38,22 +52,9 @@ t[#t+1] = Def.ActorFrame{
 		end;
 	};
 };
+end;
 
 t[#t+1] = Def.ActorFrame{
-	LoadActor("blue hl")..{
-		InitCommand=cmd(rotationz,-45;addy,-2;zoom,0.7);
-		SetCommand=function(self,param)
-			if param.Song then
-				if PROFILEMAN:IsSongNew(param.Song) then
-					self:visible(true);
-				else
-					self:visible(false);
-				end
-			else
-				self:visible(false);
-			end
-		end;
-	};
 	Def.Sprite{
 		Name="LeftBanner";
 		BeginCommand=cmd();

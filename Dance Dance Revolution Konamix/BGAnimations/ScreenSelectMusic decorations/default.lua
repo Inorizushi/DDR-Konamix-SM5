@@ -1,5 +1,12 @@
+if GAMESTATE:IsCourseMode() then 
+		UseFont = "ScreenSystemLayer credits normal"
+		elseif not GAMESTATE:IsCourseMode() then 
+		UseFont = "MusicScroll titles"
+		end;
+
 local t = LoadFallbackB();
 
+if not GAMESTATE:IsCourseMode() then 
 t[#t+1] = Def.ActorFrame{
 	Def.Quad{
 		InitCommand=cmd(CenterX;y,SCREEN_CENTER_Y+120;setsize,SCREEN_WIDTH,200;diffuse,color("#000000");diffusealpha,0;draworder,1);
@@ -7,6 +14,7 @@ t[#t+1] = Def.ActorFrame{
 		SongUnchosenMessageCommand=cmd(stoptweening;decelerate,0.2;diffusealpha,0;);
 	};
 };
+end;
 
 if not GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame{
@@ -77,49 +85,36 @@ if not GAMESTATE:IsCourseMode() then
 end;
 
 if GAMESTATE:IsCourseMode() then
-	t[#t+1] = Def.ActorFrame {
-		Def.Quad {
-			InitCommand=cmd(
-				x,THEME:GetMetric(Var "LoadingScreen","CourseContentsListX");
-				y,THEME:GetMetric(Var "LoadingScreen","CourseContentsListY") - 118;
-				zoomto,256+32,192;
-			);
-			OnCommand=cmd(diffuse,Color.Green;MaskSource);
-		};
-		Def.Quad {
-			InitCommand=cmd(
-				x,THEME:GetMetric(Var "LoadingScreen","CourseContentsListX");
-				y,THEME:GetMetric(Var "LoadingScreen","CourseContentsListY") + 186;
-				zoomto,256+32,64;
-			);
-			OnCommand=cmd(diffuse,Color.Blue;MaskSource);
-		};
-	};
-		t[#t+1] = Def.ActorFrame{
-		LoadActor(THEME:GetPathG("ScreenSelectMusic","BannerFrame")) .. {
-			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-94;zoom,0.97;zoomy,1.5);
-		};
-	};
 	t[#t+1] = StandardDecorationFromFileOptional("CourseContentsList","CourseContentsList")..{InitCommand=cmd(addx,5);};
-	t[#t+1] = Def.ActorFrame{	
-						LoadActor("CourseH")..{
-			OnCommand=cmd(zoomx,-1;xy,SCREEN_CENTER_X+637.5,54);
+	t[#t+1] = Def.ActorFrame{
+	LoadActor("CourseH.png") .. {
+		InitCommand=cmd(xy,SCREEN_CENTER_X,54);
+		OnCommand=cmd(addx,-SCREEN_WIDTH;linear,0.4;addx,SCREEN_WIDTH);
+		OffCommand=cmd(linear,0.5;diffusealpha,0);
+	};
+		LoadActor("CourseHB")..{
+			InitCommand=cmd(zoomx,-1;xy,SCREEN_CENTER_X+637.5,54);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};
-				LoadActor("CourseH")..{
-			OnCommand=cmd(zoomx,-1;xy,SCREEN_CENTER_X-637.5,54);
+		LoadActor("CourseHB")..{
+			InitCommand=cmd(zoomx,-1;xy,SCREEN_CENTER_X-637.5,54);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};	
-		LoadActor("CourseH")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X,54);
+		LoadActor("CourseHB")..{
+			InitCommand=cmd(xy,SCREEN_CENTER_X,54);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};	
 		LoadActor("CourseF")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X,464);
+			InitCommand=cmd(xy,SCREEN_CENTER_X,464);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};
 					LoadActor("CourseF")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X+640,464);
+			InitCommand=cmd(xy,SCREEN_CENTER_X+640,464);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};
 				LoadActor("CourseF")..{
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,464);
-			OnCommand=cmd(xy,SCREEN_CENTER_X-640,464);
+			InitCommand=cmd(xy,SCREEN_CENTER_X-640,464);
+			OnCommand=cmd(addx,SCREEN_WIDTH;linear,0.4;addx,-SCREEN_WIDTH);
 		};
 	};
 end
@@ -146,9 +141,27 @@ t[#t+1] = Def.ActorFrame {
 
 t[#t+1] = StandardDecorationFromFileOptional("BannerFrame","BannerFrame");
 
+t[#t+1] = LoadFont(UseFont) .. { 
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;zoomx,0.75;horizalign,center;horizalign,center); 
+	CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
+	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
+	ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
+	SetCommand=function(self) 
+    local wheel = SCREENMAN:GetTopScreen():GetChild("MusicWheel");
+	local group = wheel:GetCurrentIndex();
+    if wheel:GetSelectedType() == "WheelItemDataType_Section" then
+			self:settext(wheel:GetWheelItem(8):GetText()); 
+			self:playcommand("Refresh");
+			else
+			self:settext("");
+			self:playcommand("Refresh");
+		end 
+	end;
+};
+
 -- Song Title/Artist Info
-t[#t+1] = LoadFont("MusicScroll titles") .. { 
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;zoomx,0.75;horizalign,center;horizalign,center;); 
+t[#t+1] = LoadFont(UseFont) .. { 
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;zoomx,0.75;horizalign,center;horizalign,center); 
 	CurrentSongChangedMessageCommand=cmd(playcommand,"Set"); 
 	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
 	ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
@@ -164,7 +177,9 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 			self:settext(song:GetDisplayMainTitle()); 
 			self:playcommand("Refresh");
 		elseif course then
-			self:settext(course:GetDisplayFullTitle());
+			self:settext(string.upper(course:GetDisplayFullTitle())):maxwidth(325)
+			self:y(SCREEN_TOP+75)
+			self:diffuse(color("#9EFE38"))
 			self:playcommand("Refresh");
 		else
 			self:settext("");
@@ -172,6 +187,7 @@ t[#t+1] = LoadFont("MusicScroll titles") .. {
 		end 
 	end;
 };
+
 --Subtitle
 t[#t+1] = LoadFont("MusicScroll titles") .. { 
 	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y+12;zoomx,0.75;horizalign,center;horizalign,center;shadowlength,1;shadowcolor,color("#000000");diffuse,color("#1cfff6")); 
@@ -254,6 +270,7 @@ t[#t+1] = Def.ActorFrame{
 	};
 };
 --]]
+if not GAMESTATE:IsCourseMode() then 
 local function StepsDisplay(pn)
 	local function set(self, player)
 		self:SetFromGameState( player );
@@ -273,6 +290,7 @@ local function StepsDisplay(pn)
 
 	return t;
 end
+
 
 --default difficulty stuff
 local function GetDifListY(d)
@@ -349,4 +367,5 @@ t[#t+1] = Def.ActorFrame {
 		SelectMenuClosedMessageCommand=cmd(stop;play);
 	};
 };
+end;
 return t

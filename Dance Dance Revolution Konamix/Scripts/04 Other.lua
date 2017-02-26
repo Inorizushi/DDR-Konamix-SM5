@@ -56,6 +56,8 @@ function LoadStepsDisplayGameplayFrame(self,player)
 	local selection;
 	if GAMESTATE:IsCourseMode() then
 		selection = GAMESTATE:GetCurrentTrail(player);
+		local entry = selection:GetTrailEntry(GAMESTATE:GetLoadingCourseSongIndex() + 1)
+		selection = entry:GetSteps()
 	else
 		selection = GAMESTATE:GetCurrentSteps(player);
 	end;

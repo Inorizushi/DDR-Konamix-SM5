@@ -1,7 +1,6 @@
 local t = Def.ActorFrame{};
 
-
-t[#t+1] = Def.ActorFrame{
+	t[#t+1] = Def.ActorFrame{
 	LoadActor("yellow top")..{
 			InitCommand=cmd(rotationz,-45;addy,-2;zoom,0.7);
 			OnCommand=cmd(queuecommand,"Animate");
@@ -16,6 +15,10 @@ t[#t+1] = Def.ActorFrame{
 		else
 			self:visible(false);
 		end
+		elseif if GAMESTATE:IsCourseMode() then 
+		self:visible(true)
+		:rotationz(0)
+		end;
 	end;
 	};
 	LoadActor("yellow top")..{
@@ -32,6 +35,10 @@ t[#t+1] = Def.ActorFrame{
 		else
 			self:visible(false);
 		end
+		elseif if GAMESTATE:IsCourseMode() then 
+		self:visible(true)
+		:rotationz(0)
+		end;
 	end;
 	};
 	LoadActor("yellowright")..{
@@ -48,6 +55,10 @@ t[#t+1] = Def.ActorFrame{
 		else
 			self:visible(false);
 		end
+		elseif if GAMESTATE:IsCourseMode() then 
+		self:visible(true)
+		:rotationz(0)
+		end;
 	end;
 	};
 	LoadActor("yellowright")..{
@@ -64,6 +75,10 @@ t[#t+1] = Def.ActorFrame{
 		else
 			self:visible(false);
 		end
+		elseif if GAMESTATE:IsCourseMode() then 
+		self:visible(true)
+		:rotationz(0)
+		end;
 	end;
 	};
 }

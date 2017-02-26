@@ -1,3 +1,4 @@
+if not GAMESTATE:IsCourseMode() then 
 return Def.ActorFrame {
 	CurrentSongChangedMessageCommand=function(self)
 		local song = GAMESTATE:GetCurrentSong(); 
@@ -58,3 +59,4 @@ return Def.ActorFrame {
 		};
 	};
 };
+end;
