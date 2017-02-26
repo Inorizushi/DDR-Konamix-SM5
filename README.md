@@ -7,3 +7,5 @@ Widescreen images by MadkaT & Inorizushi
 Coding by Engine_Machiner, Inorizushi, Th3_Ov3rHell_3XoduZ
 
 tertu (CourseWheel)
+
+sigatrev (Help)
