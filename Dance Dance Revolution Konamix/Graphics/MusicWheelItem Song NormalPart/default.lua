@@ -2,21 +2,6 @@ local t = Def.ActorFrame{};
 
 
 t[#t+1] = Def.ActorFrame{
---[[Def.Sprite{
-		Name="BackgroundWheel";
-		InitCommand=cmd(draworder,0;cropto,345.3,108;y,-188);
-		SetMessageCommand=function(self,params)
-			local bgsong = params.Song;
-			local bgcourse = params.Course;
-			if bgsong and not bgcourse then
-				self:LoadFromSongBackground(bgsong);
-			elseif bgcourse and not bgsong then
-				-- call fallback
-				self:Load( THEME:GetPathG("Common fallback","background") );
-			end;
-		end;
-	};
---]]	
 	Def.Banner{
 		Name="BannerWheel";
 		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;addy,-2);
@@ -37,9 +22,6 @@ t[#t+1] = Def.ActorFrame{
 			end;
 		end;
 	};
-};
-
-t[#t+1] = Def.ActorFrame{
 	LoadActor("blue hl")..{
 		InitCommand=cmd(rotationz,-45;addy,-2;zoom,0.7);
 		SetCommand=function(self,param)
@@ -54,66 +36,117 @@ t[#t+1] = Def.ActorFrame{
 			end
 		end;
 	};
-	Def.Sprite{
-		Name="LeftBanner";
-		BeginCommand=cmd();
-		InitCommand=cmd(xy,-230,-170;scaletoclipped,320,320;cropbottom,0.35;croptop,0.25);
-		SetCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			if song then
-				if index == 7 then
-					self:LoadFromSongBackground(song);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load( THEME:GetPathG("Common fallback","banner"));
-			end;
-		end;
-	};
-	Def.Sprite{
-		Name="RightBanner";
-		BeginCommand=cmd();
-		InitCommand=cmd(xy,230,-170;scaletoclipped,320,320;cropbottom,0.35;croptop,0.25);
-		SetCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			if song then
-				if index == 9 then
-					self:LoadFromSongBackground(song);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load(THEME:GetPathG("Common fallback","banner"));
-			end;
-		end;
-	};
-	Def.Sprite{
-		Name="MidBanner";
-		BeginCommand=cmd();
-		InitCommand=cmd(xy,0,-170;scaletoclipped,320,320;cropbottom,0.35;croptop,0.25);
-		SetCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			if song then
-				if index == 8 then
-					self:LoadFromSongBackground(song);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load(THEME:GetPathG("Common fallback","banner"));
-			end;
-		end;
-	};
 };
+
+local factorsx = {-230, 0, 230};
+local indexes = {7, 8, 9};
+
+for i = 1,3 do
+	t[#t+1] = Def.ActorFrame{
+		Def.Sprite{
+			InitCommand=cmd(xy,factorsx[i],-170);
+			SetMessageCommand=function(self,params)
+				local song = params.Song
+				local index = params.DrawIndex
+				if song then
+					if index then
+						if index == indexes[i] then
+							if song:HasBackground() then
+								self:Load(song:GetBackgroundPath())
+							else
+								self:Load( THEME:GetPathG("Common fallback","banner"));
+							end;
+							self:visible(true)
+							self:scaletoclipped(320,320)
+							self:cropbottom(0.35):croptop(0.25)
+							if params.HasFocus then
+								self:diffuse(color("#FFFFFF"))
+							else
+								self:diffuse(color("0.5,0.5,0.5,1"));
+							end;
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+		LoadActor("bar")..{
+			InitCommand=cmd(xy,factorsx[i],-126);
+			SetMessageCommand=function(self,params)
+				local song = params.Song
+				local index = params.DrawIndex
+				if song then
+					if index then
+						if index == indexes[i] then
+							self:visible(true)
+							self:setsize(320,16)
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+		Def.BitmapText{
+			Font="MusicScroll titles";
+			Name="Index";
+			InitCommand=cmd(xy,factorsx[i]+150,-126;halign,1);
+			SetMessageCommand=function(self,params)
+				local song = params.Song
+				local index = params.DrawIndex
+				if song then
+					if index then
+						if index == indexes[i] then
+							self:visible(true)
+							local group = song:GetGroupName()
+							local sig = SONGMAN:GetSongsInGroup(group)
+							self:settext("idk".."/"..#sig)
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+		LoadActor("diff.lua")..{
+			InitCommand=cmd(xy,factorsx[i],-130);
+			SetMessageCommand=function(self,params)
+				local song = params.Song
+				local index = params.DrawIndex
+				if song then
+					if index then
+						if index == indexes[i] then
+							self:visible(true)
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+		LoadActor("diffcover.png")..{
+			InitCommand=cmd(xy,factorsx[i],-130);
+			SetMessageCommand=function(self,params)
+				local song = params.Song
+				local index = params.DrawIndex
+				if song then
+					if index then
+						if index == indexes[i] then
+							self:visible(true)
+							if params.HasFocus then
+								self:diffusealpha(0)
+							else
+								self:diffusealpha(0.5)
+							end;
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+	};
+end;
 
 return t;

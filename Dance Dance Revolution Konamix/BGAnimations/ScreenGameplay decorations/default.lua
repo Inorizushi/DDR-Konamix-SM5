@@ -15,11 +15,11 @@ for pn in ivalues(GAMESTATE:GetEnabledPlayers()) do
 				if (params.Player == pn) then
 					local life = string.format("%.1f",params.LifeMeter:GetLife() * 10)
 					local pills = (string.format("%.1f",life * 2.9 / 17)) * 10
-					if pills == 17 then 
+					if pills == 17 then
 						self:glowshift():effectperiod(0.1):effectcolor1(1,1,1,0.4):effectcolor2(1,1,1,0);
 					elseif pills <= 5 then
 						self:diffuseshift():effectcolor1(color("#ff0000")):effectcolor2(color("1,1,1,1"));
-					else	
+					else
 						self:stopeffect()
 					end
 				end;
@@ -57,11 +57,11 @@ for pn in ivalues(GAMESTATE:GetEnabledPlayers()) do
 			LifeChangedMessageCommand=function(self,params)
 				self:Load(THEME:GetCurrentThemeDirectory().."BGAnimations/ScreenGameplay decorations/LifeMeterBar over 17x1.png")
 				self:pause()
-				
+
 				if (params.Player == pn) then
 					local life = string.format("%.1f",params.LifeMeter:GetLife() * 10)
 					local pills = (string.format("%.1f",life * 2.9 / 17)) * 10
-					
+
 					self:setstate(-1 + i)
 					if pills >= i then self:visible(true) else self:visible(false) end
 					if pills == 17 then self:glowshift():effectperiod(0.1):effectcolor1(1,1,1,0.4):effectcolor2(1,1,1,0) else self:stopeffect() end

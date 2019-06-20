@@ -2,7 +2,7 @@ local t = Def.ActorFrame{};
 
 t[#t+1] = Def.ActorFrame{
 	Def.Banner{
-		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;zoom,0.7;addy,-2);
+		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;zoom,0.7;addy,-2;diffuse,color("#AAAAAA"));
 		SetMessageCommand=function(self,params)
 			local group = params.Text;
 			if group then
@@ -15,66 +15,54 @@ t[#t+1] = Def.ActorFrame{
 			end;
 		end;
 	};
-	Def.Banner{
-		InitCommand=cmd(xy,-200,-188;scaletoclipped,288,112);
-		SetMessageCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			local group = params.Text;
-			
-			if group then
-				if index == 7 then
-					self:LoadFromSongGroup(group);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load( THEME:GetPathG("Common fallback","banner") );
-			end;
-		end;
-	};
-	Def.Banner{
-		InitCommand=cmd(xy,0,-188;scaletoclipped,288,112);
-		SetMessageCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			local group = params.Text;
-			
-			if group then
-				if index == 8 then
-					self:LoadFromSongGroup(group);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load( THEME:GetPathG("Common fallback","banner") );
-			end;
-		end;
-	};
-	Def.Banner{
-		InitCommand=cmd(xy,200,-188;scaletoclipped,288,112);
-		SetMessageCommand=function(self,params)
-			local course = params.Course
-			local song = params.Song
-			local index = params.DrawIndex
-			local group = params.Text;
-			
-			if group then
-				if index == 9 then
-					self:LoadFromSongGroup(group);
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:Load( THEME:GetPathG("Common fallback","banner") );
-			end;
-		end;
-	};
 };
+
+local factorsx = {-230, 0, 230};
+local indexes = {7, 8, 9};
+
+for i = 1,3 do
+	t[#t+1] = Def.ActorFrame{
+		Def.Banner{
+			InitCommand=cmd(xy,factorsx[i],-184);
+			SetMessageCommand=function(self,params)
+				local group = params.Text
+				local index = params.DrawIndex
+				if group then
+					if index then
+						if index == indexes[i] then
+							self:LoadFromSongGroup(group);
+							self:visible(true)
+							self:scaletoclipped(320,124)
+							if params.HasFocus then
+								self:diffuse(color("#FFFFFF"))
+							else
+								self:diffuse(color("0.5,0.5,0.5,1"));
+							end;
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+		LoadActor("bar")..{
+			InitCommand=cmd(xy,factorsx[i],-126);
+			SetMessageCommand=function(self,params)
+				local group = params.Text
+				local index = params.DrawIndex
+				if group then
+					if index then
+						if index == indexes[i] then
+							self:visible(true)
+							self:setsize(320,16)
+						else
+							self:visible(false)
+						end;
+					end;
+				end;
+			end;
+		};
+	};
+end;
 
 return t;
