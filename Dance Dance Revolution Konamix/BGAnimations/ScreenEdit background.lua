@@ -1,14 +1,27 @@
-return Def.ActorFrame{ 
-	LoadActor(THEME:GetPathB("ScreenEditMenu","background/bg.png")) .. {
-		InitCommand=cmd(Center);
-		OffCommand=cmd(linear,0.4;diffusealpha,0);
+local t = Def.ActorFrame {
+   InitCommand=cmd(fov,90);
+};
+t[#t+1] = Def.ActorFrame {
+  InitCommand=cmd(Center);
+	LoadActor( THEME:GetPathB("ScreenWithMenuElements","background/_bg top") ) .. {
+		InitCommand=cmd(scaletoclipped,SCREEN_WIDTH,SCREEN_HEIGHT);
 	};
-	LoadActor(THEME:GetPathB("ScreenEditMenu","background/bg.png")) .. {
-		InitCommand=cmd(Center;addx,-512);
-		OffCommand=cmd(linear,0.4;diffusealpha,0);
+	Def.Quad{
+		InitCommand=cmd(scaletoclipped,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,color("0.2,0.2,0.2,0"));
+		OnCommand=function(self)
+			local topScreen = SCREENMAN:GetTopScreen()
+			if topScreen then
+				local screenName = topScreen:GetName()
+				if screenName == "ScreenEdit" or screenName == "ScreenPractice" then
+					self:diffusealpha(0.95)
+				else
+					self:diffusealpha(0.65)
+				end;
+			end;
+		end;
+		EditorShowMessageCommand=cmd(stoptweening;linear,0.5;diffusealpha,0.95);
+		EditorHideMessageCommand=cmd(stoptweening;linear,0.5;diffusealpha,0.65);
 	};
-	LoadActor(THEME:GetPathB("ScreenEditMenu","background/bg.png")) .. {
-		InitCommand=cmd(Center;addx,512);
-		OffCommand=cmd(linear,0.4;diffusealpha,0);
-	};
-}
+};
+
+return t;

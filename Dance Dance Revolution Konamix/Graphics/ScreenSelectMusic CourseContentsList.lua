@@ -16,11 +16,13 @@ CustomDifficultyColor = {
 }
 
 local transform = function(self,offsetFromCenter,itemIndex,numitems)
-	self:y( offsetFromCenter * 80 );
+	self:y( offsetFromCenter * 35 );
 end
 return Def.CourseContentsList {
-	MaxSongs = 4;
+	MaxSongs = 10;
     NumItemsToDraw = 8;
+	ShowCommand=cmd(bouncebegin,0.3;zoomy,1);
+	HideCommand=cmd(linear,0.3;zoomy,0);
 	SetCommand=function(self)
 		self:SetFromGameState();
 		self:SetCurrentAndDestinationItem(0);
@@ -71,7 +73,7 @@ return Def.CourseContentsList {
 		
  		LoadFont("CourseEntryDisplay","difficulty") .. {
 			Text="0";
-			InitCommand=cmd(x,114;y,165;zoom,0.75;shadowlength,1);
+			InitCommand=cmd(x,114;y,47;zoom,0.75;shadowlength,1);
 			SetSongCommand=function(self, params)
 				if params.PlayerNumber ~= GAMESTATE:GetMasterPlayerNumber() then return end
 				self:settext( params.Meter );

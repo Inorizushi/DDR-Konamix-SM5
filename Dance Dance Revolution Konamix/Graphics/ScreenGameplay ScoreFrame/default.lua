@@ -12,19 +12,9 @@ if GAMESTATE:IsExtraStage() or GAMESTATE:IsExtraStage2() then scoreFrame = "norm
 
 return Def.ActorFrame{
 	LoadActor(scoreFrame).. {
-		InitCommand=function(self)
-		self:addx(-176):player(PLAYER_1)
-			if IsUsingWideScreen() then
-				self:x(SCREEN_LEFT-57*4.5)
-				end;
-		end;
+		InitCommand=cmd(addx,-176;player,PLAYER_1);
 	};
 	LoadActor(scoreFrame).. {
-		InitCommand=function(self)
-		self:addx(196):player(PLAYER_2)
-				if IsUsingWideScreen() then
-					self:x(SCREEN_RIGHT+57*4.5)
-				end;
-		end;
+		InitCommand=cmd(addx,196;player,PLAYER_2);
 	};
 };

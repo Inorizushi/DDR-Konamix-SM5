@@ -1,4 +1,3 @@
-if not GAMESTATE:IsCourseMode() then 
 local Player = ...
 if not Player then error("ScreenEvaluation DifficultyIcon requires a Player") end
 
@@ -19,4 +18,3 @@ return LoadActor(THEME:GetPathG("ScreenSelectMusic","DifficultyIcon/_difficulty 
 		end
 	end;
 };
-end;

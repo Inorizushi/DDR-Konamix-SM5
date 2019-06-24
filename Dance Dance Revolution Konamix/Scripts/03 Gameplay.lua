@@ -112,7 +112,21 @@ local function upper_first_letter(s)
 end
 
 -- No more having a metric for every style for every game mode. -Kyz
-
+function ScreenSelectStyleChoices()
+	local styles= GAMEMAN:GetStylesForGame(GAMESTATE:GetCurrentGame():GetName())
+	local choices= {}
+	for i, style in ipairs(styles) do
+		local name= style:GetName()
+		local cap_name= upper_first_letter(name)
+		-- couple-edit and threepanel don't seem like they should actually be
+		-- selectable. -Kyz
+		if name ~= "couple-edit" and name ~= "threepanel" then
+			choices[#choices+1]= "name," .. cap_name .. ";style," .. name ..
+				";text," .. cap_name .. ";screen," .. Branch.AfterSelectStyle()
+		end
+	end
+	return choices
+end
 
 -- No more having an xy for every style for every game mode. -Kyz
 function ScreenSelectStylePositions(count)

@@ -13,16 +13,12 @@ t[#t+1] = Def.ActorFrame {
 	LoadActor(THEME:GetPathS("","TransitionSound"))..{
 		StartTransitioningCommand=cmd(play);
 	};
-	LoadActor("bg.png") .. {
-		OnCommand=cmd(Center;SetSize,513,480);
+	LoadActor("background.png") .. {
+		OnCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
-	LoadActor("bg.png") .. {
-		OnCommand=cmd(Center;SetSize,513,480;addx,513);
-		OffCommand=cmd(linear,0.5;diffusealpha,0);
-	};
-	LoadActor("bg.png") .. {
-		OnCommand=cmd(Center;SetSize,513,480;addx,-513);
+	LoadActor("select_style.png") .. {
+		OnCommand=cmd(x,SCREEN_CENTER_X+40;y,30);
 		OffCommand=cmd(linear,0.5;diffusealpha,0);
 	};
 };

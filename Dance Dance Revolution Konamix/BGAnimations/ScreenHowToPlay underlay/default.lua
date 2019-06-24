@@ -20,10 +20,10 @@ local t = Def.ActorFrame{
 		InitCommand=cmd(fov,20);
 		Def.Model{
 			Name="SinglePad";
-			Meshes=GetCharAnimPath("DancePad.txt");
+			Meshes=GetCharAnimPath("DancePad-DDR.txt");
 			--Materials=THEME:GetPathG("_pad","textures/DancePads.txt");
 			Materials=THEME:GetPathG("_pad","textures/DancePad-DDR.txt");
-			Bones=GetCharAnimPath("DancePad.txt");
+			Bones=GetCharAnimPath("DancePad-DDR.txt");
 
 			InitCommand=cmd(x,SCREEN_CENTER_X-57.5;y,SCREEN_CENTER_Y+110;zoom,20;rotationx,20.5;rotationy,360;cullmode,'CullMode_None';);
 			OnCommand=cmd(diffusealpha,0;hibernate,9;diffusealpha,1);

@@ -59,7 +59,7 @@ end
 Branch.AfterEvaluation = function()
 	if GAMESTATE:IsCourseMode() then
 		-- (nonstop, oni, endless eval)
-		return "ScreenSelectCourse"
+		return "ScreenNameEntry"
 	else
 		-- (normal, rave eval)
 
@@ -98,7 +98,7 @@ Branch.AfterProfileSave = function()
 	if GAMESTATE:IsCourseMode() then
 		-- course modes go to whatever, depending on ranking crap.
 		-- 3.9 says it goes to ScreenNameEntry all the time.
-		return "ScreenSelectCourse"
+		return "ScreenNameEntry"
 	else
 		if GAMESTATE:IsEventMode() then
 			-- infinite play

@@ -1,6 +1,4 @@
 -- ScreenGameplay out
-local t = Def.ActorFrame{};
-
 local travelDist = SCREEN_WIDTH*2;
 local LeftToRight = Def.ActorFrame{
 	LoadActor("_LeftToRight");
@@ -16,7 +14,7 @@ local RightToLeft = Def.ActorFrame{
 	};
 };
 
-t[#t+1] = Def.ActorFrame{
+local t = Def.ActorFrame{
 	Def.Quad{
 		Name="Blocker";
 		InitCommand=cmd(Center;FullScreen;diffuse,color("0,0,0,0"));
