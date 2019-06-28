@@ -2,7 +2,7 @@ local t = Def.ActorFrame{};
 
 t[#t+1] = Def.ActorFrame{
 	Def.Banner{
-		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;zoom,0.7;addy,-2);
+		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45;zoom,0.7;addy,-2;diffuse,color("#AAAAAA"));
 		SetMessageCommand=function(self,params)
 			local group = params.Text;
 			if group then

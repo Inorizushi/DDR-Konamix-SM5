@@ -6,7 +6,7 @@ tbl.count_2 = 0
 function WheelTransformation(self,offsetFromCenter,itemIndex,numItems)
 
 	self:x( offsetFromCenter*85 )
-
+  
 	if SCREENMAN:GetTopScreen() then
 
 		local mw = SCREENMAN:GetTopScreen():GetChild("MusicWheel")

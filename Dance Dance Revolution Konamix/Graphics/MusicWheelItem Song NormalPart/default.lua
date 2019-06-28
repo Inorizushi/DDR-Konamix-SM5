@@ -1,7 +1,5 @@
 local t = Def.ActorFrame{}
 
-
-
 local t_num = #t+1
 t[t_num] = Def.ActorFrame{
 	SetCommand=function(self,params)
@@ -15,6 +13,7 @@ t[t_num] = Def.ActorFrame{
 			end
 		end
 	end,
+
 	Def.Banner{
 		Name="BannerWheel",
 		InitCommand=cmd(scaletoclipped,256,80;rotationz,-45),
@@ -36,7 +35,7 @@ t[t_num] = Def.ActorFrame{
 			end
 		end
 	},
-
+  
 	LoadActor("blue hl")..{
 		InitCommand=cmd(rotationz,-45;zoom,0.7),
 		SetCommand=function(self,param)
@@ -105,13 +104,13 @@ for i=1,-1,-1 do
 
 end
 
-local factorsx = {-230, 0, 230};
-local indexes = {7, 8, 9};
+local factorsx = {-230, 0, 230}
+local indexes = {7, 8, 9}
 
 for i = 1,3 do
 	t[#t+1] = Def.ActorFrame{
 		Def.Sprite{
-			InitCommand=cmd(xy,factorsx[i],-170-5);
+			InitCommand=cmd(xy,factorsx[i],-170-5),
 			SetMessageCommand=function(self,params)
 				local song = params.Song
 				local index = params.DrawIndex
@@ -121,8 +120,8 @@ for i = 1,3 do
 							if song:HasBackground() then
 								self:Load(song:GetBackgroundPath())
 							else
-								self:Load( THEME:GetPathG("Common fallback","banner"));
-							end;
+								self:Load( THEME:GetPathG("Common fallback","banner"))
+							end
 							self:visible(true)
 							self:scaletoclipped(320,240)
 							self:cropbottom(0.35):croptop(0.25)
@@ -130,17 +129,18 @@ for i = 1,3 do
 							if params.HasFocus then
 								self:diffuse(color("#FFFFFF"))
 							else
-								self:diffuse(color("0.5,0.5,0.5,1"));
-							end;
+								self:diffuse(color("0.5,0.5,0.5,1"))
+							end
 						else
 							self:visible(false)
-						end;
-					end;
-				end;
-			end;
-		};
+						end
+					end
+				end
+			end
+		},
+    
 		LoadActor("bar")..{
-			InitCommand=cmd(xy,factorsx[i],-126-5);
+			InitCommand=cmd(xy,factorsx[i],-126-5),
 			SetMessageCommand=function(self,params)
 				local song = params.Song
 				local index = params.DrawIndex
@@ -151,11 +151,12 @@ for i = 1,3 do
 							self:setsize(320,16)
 						else
 							self:visible(false)
-						end;
-					end;
-				end;
-			end;
-		};
+						end
+					end
+				end
+			end
+		},
+    
 		Def.BitmapText{
 			Font="Pos numbers 10x2",
 			Name="Index",
@@ -180,6 +181,7 @@ for i = 1,3 do
 				end
 			end
 		},
+    
 		LoadActor("diff.lua")..{
 			InitCommand=cmd(xy,factorsx[i],-130-5);
 			SetMessageCommand=function(self,params)
@@ -191,13 +193,14 @@ for i = 1,3 do
 							self:visible(true)
 						else
 							self:visible(false)
-						end;
-					end;
-				end;
-			end;
-		};
+						end
+					end
+				end
+			end
+		},
+    
 		LoadActor("diffcover.png")..{
-			InitCommand=cmd(xy,factorsx[i],-130-5);
+			InitCommand=cmd(xy,factorsx[i],-130-5),
 			SetMessageCommand=function(self,params)
 				local song = params.Song
 				local index = params.DrawIndex
@@ -209,15 +212,16 @@ for i = 1,3 do
 								self:diffusealpha(0)
 							else
 								self:diffusealpha(0.5)
-							end;
+							end
 						else
 							self:visible(false)
-						end;
-					end;
-				end;
-			end;
-		};
-	};
-end;
+						end
+					end
+				end
+			end
+		},
+	}
+  
+end
 
-return t;
+return t

@@ -65,6 +65,7 @@ if GAMESTATE:IsCourseMode() then
 
 		t[#t+1] = Def.ActorFrame{
 		LoadActor(THEME:GetPathG("ScreenSelectMusic","BannerFrame")) .. {
+
 			InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-94;zoom,0.97;zoomy,1.5)
 		}
 
@@ -93,7 +94,6 @@ if GAMESTATE:IsCourseMode() then
 			OnCommand=cmd(xy,SCREEN_CENTER_X+self:GetWidth()*i,462)
 		}
 	end
-
 end
 
 t[#t+1] = StandardDecorationFromFileOptional("SortOrder","SortOrderText") .. {
