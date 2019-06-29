@@ -7,7 +7,17 @@ t[#t+1] = Def.ActorFrame{
 			local group = params.Text;
 			if group then
 				self:LoadFromSongGroup(group);
-				self:zoom(0.7);
+				self:zoom(0.7)
+				if SCREENMAN:GetTopScreen() then
+					local mw = SCREENMAN:GetTopScreen():GetChild("MusicWheel")
+					if mw:GetSelectedType() == 'WheelItemDataType_Section' and mw:GetCurrentIndex() == params.Index then
+						self:diffuse(Color.White)
+						self:xy( 25 , - 25 )
+					else
+						self:xy( 0 , 0 )
+						self:diffuse(color("#AAAAAA"))
+					end
+				end
 			else
 				-- call fallback
 				self:Load( THEME:GetPathG("Common fallback","banner") );
@@ -23,7 +33,7 @@ local indexes = {7, 8, 9};
 for i = 1,3 do
 	t[#t+1] = Def.ActorFrame{
 		Def.Banner{
-			InitCommand=cmd(xy,factorsx[i],-184);
+			InitCommand=cmd(xy,factorsx[i],-184-5);
 			SetMessageCommand=function(self,params)
 				local group = params.Text
 				local index = params.DrawIndex
@@ -46,7 +56,7 @@ for i = 1,3 do
 			end;
 		};
 		LoadActor("bar")..{
-			InitCommand=cmd(xy,factorsx[i],-126);
+			InitCommand=cmd(xy,factorsx[i],-126-5);
 			SetMessageCommand=function(self,params)
 				local group = params.Text
 				local index = params.DrawIndex

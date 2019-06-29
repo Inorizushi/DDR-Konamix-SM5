@@ -1,2 +1,1 @@
-return LoadFont("ScreenSystemLayer credits normal") .. {
-};
+return LoadFont("ScreenSystemLayer credits normal") .. {}
